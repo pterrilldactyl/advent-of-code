@@ -42,7 +42,7 @@ function firstToBasement($text)
             $level += 1;
             if ($level < 0)
             {
-                echo $counter;
+//                echo $counter;
                 return $counter;
             }
         }
@@ -52,7 +52,7 @@ function firstToBasement($text)
             $level -= 1;
             if ($level < 0)
             {
-                echo $counter;
+//                echo $counter;
                 return $counter;
             }
         }
