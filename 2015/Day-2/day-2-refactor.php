@@ -17,19 +17,9 @@ All numbers in the elves' list are in feet. How many total square feet of wrappi
 Your puzzle answer was 1586300.
 */
 
+// Input text file location: C:\Users\TerrillAnderson(MNS)\Documents\Git\advent-of-code\2015\Day-2\input.txt
 
-
-
-
-$input = file_get_contents("input.txt");
-
-// Outputs an array delimited by new line character
-function changeInputFileToArray($input)
-{
-    $input_itemized = explode("\n", $input); // Splits the challenge input into an array of box dimensions by HxWxL
-
-    return $input_itemized;
-}
+$input = "input.txt";
 
 function getPaperArea($dimensions)
 {
@@ -44,20 +34,47 @@ function getPaperArea($dimensions)
 }
 
 
-function getTotalArea($input)
+function getTotalArea($input) // $input in this case is going to be a file name
 {
     $area = 0;
 
-    foreach (changeInputFileToArray($input) as $x)
+    $filename = $input;
+
+// Open file for reading
+    $handle = fopen($filename, 'r');
+
+    if ($handle) 
     {
-        //echo "This is x: ".$x."\n";
-        $area += getPaperArea($x);
-        //echo "New Total Area: " . $area."\n";
+        // Loop until end-of-file is reached
+        while (!feof($handle)) 
+        {
+
+            $line = fgets($handle); // Read a line
+
+            if ($line !== false) 
+            {
+                //echo "Line: " . $line . "<br>"; // Output or process the line
+                //array_push($input_array, $line);
+                $area += getPaperArea($line);
+                
+            }
+
+        }
+
+        fclose($handle); // Always remember to close the file
+
+    } 
+
+    else 
+    {
+        echo "Error: Cannot open file.";
     }
+
     return $area;
 }
 
 //echo getTotalArea($input);
+
 // Part one is done. Finally. Stupid math.
 
 /*
@@ -89,13 +106,74 @@ function getRibbonLength ($dimensions)
 function getTotalRibbon ($input)
 {
     $length = 0;
-    foreach (changeInputFileToArray($input) as $x)
+
+    $filename = $input;
+
+// Open file for reading
+    $handle = fopen($filename, 'r');
+
+    if ($handle) 
     {
-        $length += getRibbonLength($x);
+        // Loop until end-of-file is reached
+        while (!feof($handle)) 
+        {
+
+            $line = fgets($handle); // Read a line
+
+            if ($line !== false) 
+            {
+                //echo "Line: " . $line . "<br>"; // Output or process the line
+                //array_push($input_array, $line);
+                $length += getRibbonLength($line);
+                
+            }
+
+        }
+
+        fclose($handle); // Always remember to close the file
+
+    } 
+
+    else 
+    {
+        echo "Error: Cannot open file.";
     }
     return $length;
 }
 
-//echo getTotalRibbon ($input);
+echo getTotalRibbon ($input);
 
-// Cool. Now refactor it to use a file pointer on the input.
+
+/*
+
+$filename = 'input.txt';
+
+$input_array = [];
+
+if (file_exists($filename)) 
+{
+    $handle = fopen($filename, 'r');
+
+    if ($handle) 
+    {
+        while (($line = fgets($handle)) !== false) 
+        {
+            // Each line is stored in $line as a string
+            $lineString = (string)$line;
+
+            // Do something with $lineString, e.g., output or append
+            //echo $lineString;
+            //array_push($input_array, $lineString);
+        }
+
+        fclose($handle);
+    } else 
+    {
+        echo "Error: Unable to open file.";
+    }
+} else 
+{
+    echo "Error: File does not exist.";
+}
+
+*/
