@@ -27,13 +27,13 @@ $x = 1;
 $secret = "ckczppom";
 set_time_limit(60);
 $start_time = microtime(true);
-while (substr(md5($secret.$x), 0, 7) !== "0000000")
+while (substr(md5($secret.$x), 0, 6) !== "000000")
 {
     $x++;
     //$secret;
 }
 $end_time = microtime(true);
 $run_time = $end_time - $start_time;
-
-echo "This took " . $run_time . " seconds to complete. \n";
+$formatted_time = number_format($run_time, 3, ".", "");
+echo "This took " . $formatted_time . " seconds to complete. \n";
 echo $x;
