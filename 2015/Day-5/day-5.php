@@ -38,10 +38,7 @@ function checkVowels ($line) //Checks a string of alpha characters for at least 
         {
             return TRUE;
         }
-        else
-        {
-            continue;
-        }
+
     }
 
     return FALSE;
@@ -49,6 +46,8 @@ function checkVowels ($line) //Checks a string of alpha characters for at least 
 
 function checkRepeats ($line) // Checks a string of alpha characters for any repeating characters
 {
+    //'/(.(.).)/'
+
     preg_match_all('/(.)\1/', $line, $matches);
     $matchcount = count($matches[0]);
     if ($matchcount == 0)
@@ -69,11 +68,7 @@ function checkBadPairs($line, $pairs = ["ab", "cd", "pq", "xy"]) //Makes sure th
         {
             return FALSE;
         }
-        else
-        {
-            continue;
-            //return TRUE;
-        }
+
     }
     return TRUE;
 }
